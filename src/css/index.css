@@ -1,0 +1,25 @@
+body,html{
+    background-color: pink;
+    padding: 0;
+    margin: 0;
+    height:100%;
+}
+
+div[class*='box-']{
+    width:100px;
+    height:100px;
+    display: inline-block;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position: 50%;
+}
+.box-1{
+    background-image: url(./img/react.jpg);
+}
+.box-2{
+    background-image: url(./img/vue.jpeg);
+}
+.box-3{
+    display: flex;
+    backface-visibility: hidden;
+}
