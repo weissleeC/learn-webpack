@@ -6,12 +6,28 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 压缩 css
 const OptizizeCssAssetWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
+const commonCssLoader = [
+  MiniCssExtractPlugin.loader,
+  'css-loader',
+  {
+    loader: 'postcss-loader',
+    options: {
+      ident: 'postcss',
+      sourceMap: true,
+      plugins: () => [
+        require('autoprefixer')({ browsers: ['> 0.15% in CN'] }), // 添加前缀
+      ],
+    },
+  },
+];
+
 // 设置 nodejs 环境变量
 process.env.NODE_ENV = 'development';
 
 module.exports = {
   // 环境模式
   mode: 'development', // 开发模式
+  // 在生产模式中，js 会被自动压缩
   // mode: 'production', // 生产模式
 
   // 入口起点
@@ -32,21 +48,6 @@ module.exports = {
       // 不同文件资源需要不同的 loader 资源去处理
       // use 数组中的 loader 是从右到左的顺序执行，即从下到上
 
-      // eslint 语法检查
-      // 只会检查自己写的代码，第三方库忽略检查
-      // 设置检查规则：package.json 中 eslintConfig 中设置，如下
-      // "eslintConfig": { "extends": "airbnb-base" }
-      // 需要的包有：eslint-config-airbnb-base eslint-plugin-import eslint eslin-loader
-      {
-        test: /\.js$/,
-        exclude: '/node_modules/',
-        loader: 'eslint-loader',
-        options: {
-          // 自动修复 eslint 错误
-          fix: true,
-        },
-      },
-
       // 处理 css loader
       {
         // test 匹配哪些文件
@@ -58,9 +59,9 @@ module.exports = {
           // 'style-loader',
 
           // 从 js 中把 css 提取出，单独生成一个 css 文件
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
           // 将 css 文件变成 commonjs 模块加载 js 中，里面内容是样式字符串
-          'css-loader',
+          // 'css-loader',
           /*
             css 兼容性处理，需要安装 postcss-loader postcss-preset-env
             帮助 postcss 在 package.json 样式版本配置
@@ -81,16 +82,17 @@ module.exports = {
                 ]
               }
           */
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: true,
-              plugins: () => [
-                require('autoprefixer')({ browsers: ['> 0.15% in CN'] }), // 添加前缀
-              ],
-            },
-          },
+          // {
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     ident: 'postcss',
+          //     sourceMap: true,
+          //     plugins: () => [
+          //       require('autoprefixer')({ browsers: ['> 0.15% in CN'] }), // 添加前缀
+          //     ],
+          //   },
+          // },
+          ...commonCssLoader,
         ],
       },
 
@@ -100,8 +102,9 @@ module.exports = {
         use: [
           // 需要下载 less-loader 和 less
           // 将 less 文件处理成 css
-          'style-loader', // step 3
-          'css-loader', // step 2
+          // 'style-loader', // step 3
+          // 'css-loader', // step 2
+          ...commonCssLoader,
           'less-loader', // step 1
         ],
       },
@@ -132,10 +135,23 @@ module.exports = {
 
       // 处理 html 中 img 标签的图片 loader
       {
-        test: /\.html$/,
-        loader: 'html-loader',
+        test: /\.html$/,loader: 'html-loader',
       },
 
+      // JS 兼容性处理 babel-loader
+      // babel-loader 无法处理更高级的 ES 写法，所以需要使用 corejs 去处理
+      {
+        test: /\.js$/,exclude: /node_modules/,loader: 'babel-loader'
+      },
+
+      // 其他文件处理
+      {
+        exclude: /\.(html|css|js|less|sass|jpg|png|gif|jpeg)$/, // 排除指定文件不被此 loader 输出
+        loader: 'file-loader',
+        options: {
+          outputPath: 'media', // 源文件输出到指定文件夹
+        },
+      },
     ],
   },
 
@@ -146,7 +162,13 @@ module.exports = {
       // 复制 './src/imdex/html' 文件，并自动引入打包输出的所有资源(js/css)
       template: './src/index.html',
       // 压缩 html
-      minify: false,
+      // minify: true,
+      minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true,
+      },
     }),
 
     new MiniCssExtractPlugin({
@@ -166,7 +188,7 @@ module.exports = {
     // 启动 gzip 压缩
     compress: true,
     // 端口号
-    port: 3080,
+    port: 8080,
     // 自动打开浏览器
     open: true,
   },
