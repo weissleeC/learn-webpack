@@ -1,13 +1,13 @@
 body,html{
-    background-color: pink;
+    background-color: deeppink;
     padding: 0;
     margin: 0;
     height:100%;
 }
 
 div[class*='box-']{
-    width:100px;
-    height:100px;
+    width:300px;
+    height:300px;
     display: inline-block;
     background-size:cover;
     background-repeat:no-repeat;
