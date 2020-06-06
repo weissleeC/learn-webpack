@@ -41,7 +41,7 @@ webpack 是一种前端构建工具，一个*静态模块打包器(module bundle
 
 ```javascript
 module.exports = {
-  entry : './path/to/my/entry/file.js'
+  entry: './path/to/my/entry/file.js'
 }
 ```
 
@@ -50,12 +50,12 @@ module.exports = {
 ```javascript
 module.exports = {
 	//支持 string | object | array 
-	entry : './path/to/my/entry/file.js'
+	entry: './path/to/my/entry/file.js'
 
-	entry : [ './app/file1.js', './app/file2.js' ]
+	entry: [ './app/file1.js', './app/file2.js' ]
 
-	entry : {
-		a : './app/file1.js',
+	entry: {
+		a: './app/file1.js',
 		b: [ './app/file2.js', './app/file3.js' ]
 	}
 }
@@ -71,9 +71,9 @@ module.exports = {
 const path = require('path');
 
 module.exports = {
-	entry : './path/to/my/entry/file.js',
+	entry: './path/to/my/entry/file.js',
 
-	output :{
+	output: {
 		path: path.resolve(__dirname, 'dist');
 		filename: 'my-fist-webpack.bundles.js'
 	}
@@ -86,13 +86,13 @@ module.exports = {
 const path = require('path');
 
 module.exports = {
-	entry : [ './app/file1.js', './app/file2.js' ],
+	entry: [ './app/file1.js', './app/file2.js' ],
 
-	output : {
-		path : path.resolve(__dirname, 'dist'),
-		filename : '[name].js'
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: '[name].js'
 		// 也可以加上 hash 值
-		filename : '[name].[hash:10].js'
+		filename: '[name].[hash:10].js'
 	}
 }
 ```
@@ -107,15 +107,15 @@ webpack 自身的能力只能处理 JS，因此需要 loader 让 webpack 能够�
 const path = require('path');
 
 module.exports = {
-	entry : './path/to/my/entry/file.js',
+	entry: './path/to/my/entry/file.js',
 
-	output : {
-		path : path.resolve(__dirname, 'dist'),
+	output: {
+		path: path.resolve(__dirname, 'dist'),
 		filename : '[name].js'
 	},
 
-	module : {
-		rules : [
+	module: {
+		rules: [
 			{ test: /\.txt$/, use: 'raw-loader' }
 		]
 	}
@@ -137,12 +137,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
 const webpack = require('webpack');
 
 module.exports = {
-	module : {
-		rules : [
+	module: {
+		rules: [
 			{ test: /\.txt$/, use: 'raw-loader' }
 		]
 	},
-	plugins : [
+	plugins: [
 		new HtmlWebpackPlugin({template: './src/index.html'});
 	]
 }
