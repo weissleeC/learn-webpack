@@ -41,7 +41,7 @@ webpack 是一种前端构建工具，一个*静态模块打包器(module bundle
 
 ```javascript
 module.exports = {
-	entry : './path/to/my/entry/file.js'
+  entry : './path/to/my/entry/file.js'
 }
 ```
 
@@ -153,6 +153,6 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	mode: 'production'
+  mode: 'production'
 }
 ```
