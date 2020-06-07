@@ -3,7 +3,7 @@
 
 ### 一、 WebPack 是什么
 
-webpack 是一种前端构建工具，一个*静态模块打包器(module bundler)*。在 webpack 看来，前端所有资源文件(js/json/css/img/less/...)都会被座位模块处理，它根据模块依赖关系进行静态分析，打包生成对应的*静态资源(bundle)*
+webpack 是一种前端构建工具，一个*静态模块打包器(module bundler)*。在 webpack 看来，前端所有资源文件(js/json/css/img/less/...)都会被作为模块处理，它根据模块依赖关系进行静态分析，打包生成对应的*静态资源(bundle)*
 > 举例：在 HTML 中引入 Sass、Less 和更高级的 ES 语法，浏览器是无法识别的，此时就需要借助 webpack 构建工具去处理 
 
 #### 1.1 传统的 JS 组织方式
@@ -21,7 +21,6 @@ webpack 是一种前端构建工具，一个*静态模块打包器(module bundle
 	文件和文件间没有明显的依赖关系，有依赖关系的文件有顺序有先后，不利于维护和后期迭代。
 
 #### 1.2 WebPack 构建方式
-> 一切皆为模块
 
 在 webpack 中一切皆为模块，出了常见的 JS 的模块外，css、图片、字体、等资源都可以被当作模块处理。模块引入方式有很多，比如以下几种
 + ES 2015 的 import
@@ -106,7 +105,7 @@ module.exports = {
 webpack 自身的能力只能处理 JS，因此需要 loader 让 webpack 能够去处理那些非 JS 文件。
 在 webpack 的配置中 loader 有两个必须属性：
 1. `test` 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件。
-2. `use` 属性，表示进行转换时，应该使用哪个 loader。
+2. `use` 属性，表示进行转换时，应该使用哪个 loader。如果只有一个 loader 声明，写法则是：`loader: 'xxx-loader'`
 
 ```javascript
 const path = require('path');
@@ -129,7 +128,7 @@ module.exports = {
 以上配置中，对一个单独的 module 对象定义了 rules 属性，里面包含两个必须属性：test 和 use。这告诉 webpack 编译器(compiler) 如下信息：
 > “嘿，webpack 编译器，当你碰到「在 require()/import 语句中被解析为 '.txt' 的路径」时，在你对它打包之前，先使用 raw-loader 转换一下。”
 
-** 在 webpack 配置中定义 loader 时，要定义在 module.rules 中，而不是 rules。**
+**在 webpack 配置中定义 loader 时，要定义在 module.rules 中，而不是 rules。**
 
 #### 2.3 插件 Plugins
 
@@ -170,7 +169,7 @@ module.exports = {
 1. 全局安装 webpack `npm i webpack webpack-cli -g`
 2. 创建一个新项目 `mkdir my-first-webpack`
 3. 在项目下初始化 `npm init -y`
-4. 在项目下 webpack 包 `npm i webpack -D`
+4. 在项目下安装 webpack 包 `npm i webpack webpack-cli -D`
 5. 创建 webpack.config.js 配置文件 `touch webpack.config.js`
 
 #### 3.2 处理样式资源
