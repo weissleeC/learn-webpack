@@ -287,13 +287,69 @@ module.exports = {
         exclude: /\.(html|css|js|less|sass|jpg|png|gif|jpeg)$/, // 排除指定文件不被此 loader 输出
         loader: 'file-loader',
         options: {
-        name: '[hash:8].[ext]',
+          name: '[hash:8].[ext]',
 
-        // 源文件输出到指定文件夹
-        outputPath: 'media',
+          // 源文件输出到指定文件夹
+          outputPath: 'media',
         },
       },
     ]
   }
+}
+```
+
+#### 3.5 开启 devServer
+
+1. 安装包 `npm i webpack-dev-server -D`
+2. devServer 作用：
+  + 用于自动编译、自动打开浏览器、自动刷新
+  + 特点：只会在内存中编译打包，不会有任何输出
+  + 启动命令：`npx webpack-dev-server`
+
+```javascript
+const path = require('path');
+module.exports = {
+  devServer: {
+    // 项目构建后路径
+    contentBase: resolve(__dirname, 'build'),
+
+    // 启动 gzip 压缩
+    compress: true,
+
+    // 端口号
+    port: 8080,
+
+    // 自动打开浏览器
+    open: true,
+  }
+}
+```
+
+#### 3.5 创建 CSS 文件
+
+使用 `npm i mini-css-extract-plugin -D` 将 css 创建成独立的文件
+
+```javascript
+const path = require('path');
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  module: {
+    {
+      test: /\.css$/,
+      use: [ 
+        // 改 loader 作用是把 JS 中的 css 提取成单独的文件
+        MiniCssExtractPlugin.loader, 
+        'css-loader' 
+      ]
+    },
+  },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    })
+  ],
 }
 ```
