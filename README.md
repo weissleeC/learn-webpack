@@ -53,15 +53,15 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	//支持 string | object | array 
-	entry: './path/to/my/entry/file.js'
+  //支持 string | object | array 
+  entry: './path/to/my/entry/file.js'
 
-	entry: [ './app/file1.js', './app/file2.js' ]
+  entry: [ './app/file1.js', './app/file2.js' ]
 
-	entry: {
-		a: './app/file1.js',
-		b: [ './app/file2.js', './app/file3.js' ]
-	}
+  entry: {
+    a: './app/file1.js',
+    b: [ './app/file2.js', './app/file3.js' ]
+  }
 }
 ```
 
