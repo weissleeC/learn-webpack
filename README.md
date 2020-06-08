@@ -293,7 +293,7 @@ module.exports = {
         outputPath: 'media',
         },
       },
-		]
-	}
+    ]
+  }
 }
 ```
