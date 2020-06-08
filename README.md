@@ -196,19 +196,19 @@ module.exports = {
         ],
       },
 
-			// less loader
-			{
-				test: /\.less$/,
-				use: [
-					'style-loader',
-					'css-loader',
+      // less loader
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
 
-					// 将 lees 文件编译成 css 文件
-					'less-loader'
-				]
-			}
-		]
-	}
+          // 将 lees 文件编译成 css 文件
+          'less-loader'
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -224,7 +224,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	// plugins
+  // plugins
   plugins: [
     // html-webpack-plugin 作用：创建一个空的 HTML，自动引入打包输出所有资源（JS/CSS）
     new HtmlWebpackPlugin({
@@ -241,7 +241,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	// loader 配置
+  // loader 配置
   module: {
     rules: [
       // 处理 css 图片资源
@@ -262,9 +262,9 @@ module.exports = {
           // [ext] 取文件原来的拓展名字（后缀）
           name: '[hash:6].[ext]',
         }
-			},
+      },
 			
-			// 处理 html 文件的 img 图片
+      // 处理 html 文件的 img 图片
       {
         test: /\.html$/,
         loader: 'html-loader',
@@ -280,17 +280,17 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	module: {
-		rules: [
-			// 其他文件处理
+  module: {
+    rules: [
+      // 其他文件处理
       {
         exclude: /\.(html|css|js|less|sass|jpg|png|gif|jpeg)$/, // 排除指定文件不被此 loader 输出
         loader: 'file-loader',
         options: {
-          name: '[hash:8].[ext]',
+        name: '[hash:8].[ext]',
 
-          // 源文件输出到指定文件夹
-          outputPath: 'media',
+        // 源文件输出到指定文件夹
+        outputPath: 'media',
         },
       },
 		]
