@@ -302,9 +302,9 @@ module.exports = {
 
 1. 安装包 `npm i webpack-dev-server -D`
 2. devServer 作用：
-  + 用于自动编译、自动打开浏览器、自动刷新
-  + 特点：只会在内存中编译打包，不会有任何输出
-  + 启动命令：`npx webpack-dev-server`
+    + 用于自动编译、自动打开浏览器、自动刷新
+    + 特点：只会在内存中编译打包，不会有任何输出
+    + 启动命令：`npx webpack-dev-server`
 
 ```javascript
 const path = require('path');
