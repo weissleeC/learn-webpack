@@ -75,12 +75,12 @@ module.exports = {
 const path = require('path');
 
 module.exports = {
-	entry: './path/to/my/entry/file.js',
+  entry: './path/to/my/entry/file.js',
 
-	output: {
-		path: path.resolve(__dirname, 'dist');
-		filename: 'my-fist-webpack.bundles.js'
-	}
+  output: {
+    path: path.resolve(__dirname, 'dist');
+    filename: 'my-fist-webpack.bundles.js'
+  }
 }
 ```
 
@@ -90,14 +90,14 @@ module.exports = {
 const path = require('path');
 
 module.exports = {
-	entry: [ './app/file1.js', './app/file2.js' ],
+  entry: [ './app/file1.js', './app/file2.js' ],
 
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js'
-		// 也可以加上 hash 值
-		filename: '[name].[hash:10].js'
-	}
+  output: {
+   path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+    // 也可以加上 hash 值
+    filename: '[name].[hash:10].js'
+  }
 }
 ```
 #### 2.3 Loader
@@ -111,18 +111,18 @@ webpack 自身的能力只能处理 JS，因此需要 loader 让 webpack 能够�
 const path = require('path');
 
 module.exports = {
-	entry: './path/to/my/entry/file.js',
+  entry: './path/to/my/entry/file.js',
 
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename : '[name].js'
-	},
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename : '[name].js'
+  },
 
-	module: {
-		rules: [
-			{ test: /\.txt$/, use: 'raw-loader' }
-		]
-	}
+  module: {
+   rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+   ]
+  }
 }
 ```
 以上配置中，对一个单独的 module 对象定义了 rules 属性，里面包含两个必须属性：test 和 use。这告诉 webpack 编译器(compiler) 如下信息：
@@ -141,14 +141,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
 const webpack = require('webpack');
 
 module.exports = {
-	module: {
-		rules: [
-			{ test: /\.txt$/, use: 'raw-loader' }
-		]
-	},
-	plugins: [
-		new HtmlWebpackPlugin({template: './src/index.html'});
-	]
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({template: './src/index.html'});
+  ]
 }
 ```
 #### 2.4 模式
@@ -179,22 +179,22 @@ module.exports = {
 
 ```javascript
 module.exports = {
-	// loader 配置
-	module: {
-		rules: [
-			// css loader
-			{ 
-				test: /\.css$/,
-				use: [
-					// use 数组中 loader 的执行顺序是从右到左、从下到上依次执行
+  // loader 配置
+  module: {
+    rules: [
+      // css loader
+      { 
+        test: /\.css$/,
+        use: [
+          // use 数组中 loader 的执行顺序是从右到左、从下到上依次执行
 
-					// step2 创建 style 标签，将在编译后的 JS 中样式资源读取，添加到 head 中生效
-					'style-loader',
+          // step2 创建 style 标签，将在编译后的 JS 中样式资源读取，添加到 head 中生效
+          'style-loader',
 
-					// step1 将 css 文件变成 commonjs 模块加载 JS 中，并编译打包在 JS 里形成样式字符串
-					'css-loader'
-				],
-			},
+          // step1 将 css 文件变成 commonjs 模块加载 JS 中，并编译打包在 JS 里形成样式字符串
+          'css-loader'
+        ],
+      },
 
 			// less loader
 			{
