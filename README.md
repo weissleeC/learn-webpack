@@ -353,3 +353,7 @@ module.exports = {
   ],
 }
 ```
+
+#### 3.6 CSS 兼容性处理
+
+使用 `npm i postcss-loader postcss-preset-env -D` 两个包
