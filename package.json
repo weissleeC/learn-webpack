@@ -19,7 +19,7 @@
   "homepage": "https://github.com/weissleeC/learn-webpack#readme",
   "devDependencies": {
     "css-loader": "^3.5.3",
-    "cssnano": "^4.1.10",
+    "cssnano": "^8.0.2",
     "file-loader": "^6.0.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
